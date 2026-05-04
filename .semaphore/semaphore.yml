@@ -17,6 +17,7 @@ global_job_config:
     commands:
       - checkout
       - sem-version python 3.12
+      - sudo apt-get update -y && sudo apt-get install -y python3.12-venv
       - 'export PATH="$HOME/.local/bin:$PATH"'
 blocks:
   - name: 'Block #1'
@@ -41,6 +42,8 @@ blocks:
         - name: SBOM
           commands:
             - cd 2-sbom
+            - python3 -m venv venv
+            - source venv/bin/activate
             - pip install cyclonedx-bom
             - cyclonedx-py requirements -o bom.json
   - name: 'Block #3'
@@ -51,7 +54,6 @@ blocks:
         - name: Run dependency scanning
           commands:
             - cd 3-dependency-scanning
-            - sudo apt-get update -y && sudo apt-get install -y python3.12-venv
             - python3 -m venv venv
             - source venv/bin/activate
             - pip install pip-audit
@@ -64,6 +66,8 @@ blocks:
         - name: SAST
           commands:
             - cd 4-sast
+            - python3 -m venv venv
+            - source venv/bin/activate
             - pip install bandit
             - bandit -r vulnerable_script.py || true
   - name: 'Block #5'
@@ -74,6 +78,8 @@ blocks:
         - name: DAST
           commands:
             - cd 5-dast
+            - python3 -m venv venv
+            - source venv/bin/activate
             - pip install -r requirements.txt
             - pip install wapiti3
             - 'gunicorn -b 0:0:0:0:4000 app:app --daemon'
