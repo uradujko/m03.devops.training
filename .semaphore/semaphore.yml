@@ -16,6 +16,7 @@ global_job_config:
   prologue:
     commands:
       - checkout
+      - 'export PATH="$HOME/.local/bin:$PATH"'
 blocks:
   - name: Sign
     dependencies: []
@@ -40,7 +41,6 @@ blocks:
           commands:
             - cd 2-sbom
             - pip install cyclonedx-bom
-            - 'export PATH="$HOME/.local/bin:$PATH"'
             - cyclonedx-py requirements -o bom.json
   - name: 'Block #3'
     dependencies:
