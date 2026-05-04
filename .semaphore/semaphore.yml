@@ -50,6 +50,14 @@ blocks:
         - name: Run dependency scanning
           commands:
             - cd 3-dependency-scanning
-            - Y | sudo apt install python3.12-venv
             - pip install pip-audit
             - pip-audit -r requirements.txt
+  - name: 'Block #4'
+    dependencies: []
+    task:
+      jobs:
+        - name: SAST
+          commands:
+            - cd 4-sast
+            - pip install bandit
+            - bandit -r vulnerable_script.py
