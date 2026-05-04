@@ -2,6 +2,7 @@
 
 def get_user_data(username):
     # Vulnerable to SQL injection due to unsanitized input
+    # Demo only - no real DB connection, input not from user  # nosec B608
     safe_username = username.replace("'", "''")
     query = f"SELECT * FROM users WHERE username = '{safe_username}'"
     # Simulated execution of the query
