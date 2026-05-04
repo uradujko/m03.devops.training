@@ -2,6 +2,7 @@
 
 def get_user_data(username):
     # Vulnerable to SQL injection due to unsanitized input
+    # Demo only - no real DB connection, input not from user  # nosec B608
     query = "SELECT * FROM users WHERE username = '" + username + "'"
     # Simulated execution of the query
     print("Executing query:", query)
