@@ -2,7 +2,8 @@
 
 def get_user_data(username):
     # Vulnerable to SQL injection due to unsanitized input
-    query = "SELECT * FROM users WHERE username = '" + username + "'"
+    safe_username = username.replace("'", "''")
+    query = f"SELECT * FROM users WHERE username = '{safe_username}'"
     # Simulated execution of the query
     print("Executing query:", query)
 
