@@ -57,7 +57,7 @@ blocks:
             - python3 -m venv venv
             - source venv/bin/activate
             - pip install pip-audit
-            - pip-audit -r requirements.txt || true
+            - pip-audit -r requirements.txt
   - name: 'Block #4'
     dependencies:
       - 'Block #3'
@@ -69,7 +69,7 @@ blocks:
             - python3 -m venv venv
             - source venv/bin/activate
             - pip install bandit
-            - bandit -r vulnerable_script.py || true
+            - bandit -r vulnerable_script.py
   - name: 'Block #5'
     dependencies:
       - 'Block #4'
