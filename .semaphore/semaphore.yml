@@ -37,8 +37,5 @@ blocks:
           commands:
             - checkout
             - cd 2-sbom
-            - apt install python3.12-venv
-            - python3 -m venv venv
-            - source venv/bin/activate
             - pip install cyclonedx-bom
             - cyclonedx-py requirements -o bom.json
