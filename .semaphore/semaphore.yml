@@ -21,8 +21,8 @@ blocks:
           commands:
             - checkout
             - cd 1-signing
-            - gpg --import /root/public.key
-            - gpg --import /root/private.key
+            - gpg --import /home/semaphore/public.key
+            - gpg --import /home/semaphore/private.key
             - gpg --output artifact.txt.sig --detach-sign artifact.txt
             - gpg --verify artifact.txt.sig artifact.txt
       secrets:
