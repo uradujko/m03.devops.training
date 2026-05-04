@@ -16,6 +16,7 @@ global_job_config:
   prologue:
     commands:
       - checkout
+      - sem-version python 3.12
       - 'export PATH="$HOME/.local/bin:$PATH"'
 blocks:
   - name: Sign
