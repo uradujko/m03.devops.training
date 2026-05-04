@@ -51,6 +51,9 @@ blocks:
         - name: Run dependency scanning
           commands:
             - cd 3-dependency-scanning
+            - sudo apt-get install -y python3.12-venv
+            - python3 -m venv venv
+            - source venv/bin/activate
             - pip install pip-audit
             - pip-audit -r requirements.txt
   - name: 'Block #4'
