@@ -45,7 +45,7 @@ blocks:
             - cyclonedx-py requirements -o bom.json
   - name: 'Block #3'
     dependencies:
-      - 'Block #5'
+      - 'Block #2'
     task:
       jobs:
         - name: Run dependency scanning
@@ -55,7 +55,7 @@ blocks:
             - pip-audit -r requirements.txt
   - name: 'Block #4'
     dependencies:
-      - 'Block #2'
+      - 'Block #3'
     task:
       jobs:
         - name: SAST
@@ -68,7 +68,7 @@ blocks:
       - 'Block #4'
     task:
       jobs:
-        - name: 'Job #1'
+        - name: DAST
           commands:
             - cd 5-dast
             - pip install -r requirements.txt
