@@ -38,4 +38,5 @@ blocks:
             - checkout
             - cd 2-sbom
             - pip install cyclonedx-bom
+            - 'export PATH="$HOME/.local/bin:$PATH"'
             - cyclonedx-py requirements -o bom.json
