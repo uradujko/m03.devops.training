@@ -12,6 +12,10 @@ auto_cancel:
     when: branch != 'main'
   queued:
     when: branch = 'main'
+global_job_config:
+  prologue:
+    commands:
+      - checkout
 blocks:
   - name: Sign
     dependencies: []
@@ -19,7 +23,6 @@ blocks:
       jobs:
         - name: Sign
           commands:
-            - checkout
             - cd 1-signing
             - gpg --import /home/semaphore/public.key
             - gpg --import /home/semaphore/private.key
@@ -35,8 +38,17 @@ blocks:
       jobs:
         - name: SBOM
           commands:
-            - checkout
             - cd 2-sbom
             - pip install cyclonedx-bom
             - 'export PATH="$HOME/.local/bin:$PATH"'
             - cyclonedx-py requirements -o bom.json
+  - name: 'Block #3'
+    dependencies:
+      - 'Block #2'
+    task:
+      jobs:
+        - name: Run dependency scanning
+          commands:
+            - cd 3-dependency-scanning
+            - pip install pip-audit
+            - pip-audit -r requirements.txt
