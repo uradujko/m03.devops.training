@@ -44,7 +44,8 @@ blocks:
             - pip install cyclonedx-bom
             - cyclonedx-py requirements -o bom.json
   - name: 'Block #3'
-    dependencies: []
+    dependencies:
+      - 'Block #5'
     task:
       jobs:
         - name: Run dependency scanning
