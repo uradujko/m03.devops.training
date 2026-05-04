@@ -35,6 +35,8 @@ blocks:
       jobs:
         - name: SBOM
           commands:
+            - checkout
+            - cd 2-sbom
             - python -m venv venv
             - source venv/bin/activate
             - pip install cyclonedx-bom
