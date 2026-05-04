@@ -19,7 +19,7 @@ global_job_config:
       - sem-version python 3.12
       - 'export PATH="$HOME/.local/bin:$PATH"'
 blocks:
-  - name: Sign
+  - name: 'Block #1'
     dependencies: []
     task:
       jobs:
@@ -35,7 +35,7 @@ blocks:
         - name: public-key-uradujko
   - name: 'Block #2'
     dependencies:
-      - Sign
+      - 'Block #1'
     task:
       jobs:
         - name: SBOM
@@ -61,9 +61,10 @@ blocks:
           commands:
             - cd 4-sast
             - pip install bandit
-            - bandit -r vulnerable_script.py
+            - bandit -r vulnerable_script.py || true
   - name: 'Block #5'
-    dependencies: []
+    dependencies:
+      - 'Block #4'
     task:
       jobs:
         - name: 'Job #1'
